@@ -3,10 +3,10 @@
 return [
     'components' => [
         'db' => [
-            'class' => \yii\db\Connection::class,
-            'dsn' => 'mysql:host=localhost;dbname=yii2advanced',
-            'username' => 'root',
-            'password' => '',
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=portfolio',
+            'username' => 'portfolio',
+            'password' => '1234',
             'charset' => 'utf8',
         ],
         'mailer' => [

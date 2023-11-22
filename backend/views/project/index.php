@@ -7,7 +7,7 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var backend\models\ProjectSearch $searchModel */
+/** @var backend\models\PorjectSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
 $this->title = Yii::t('app', 'Projects');

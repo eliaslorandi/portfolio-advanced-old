@@ -20,7 +20,10 @@ use kartik\editors\Summernote;
     // other widget settings
     ]); ?>
 
-    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
+<?= $form->field($model, 'description')->widget(Summernote::class, [
+    'useKrajeePresets' => true,
+    // other widget settings
+    ]); ?>
 
     <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::class, [
         //'language' => 'ru',

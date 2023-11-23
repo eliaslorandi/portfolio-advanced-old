@@ -23,7 +23,7 @@ class Project extends \yii\db\ActiveRecord
     /**
      * @var UploadedFile
      */
-    public $imageFiles;
+    public $imageFile;
 
     /**
      * {@inheritdoc}
@@ -98,7 +98,7 @@ class Project extends \yii\db\ActiveRecord
              * @var $db \yii\db\Connection
             */
             $file = new File();
-            $file->name = uniqid(true) . $this->imageFile->extensions;
+            $file->name = uniqid(true) . '.' . $this->imageFile->extension;
             $file->base_url = Yii::$app->urlManager->createAbsoluteUrl(Yii::$app->params['uploads']['projects']);
             $file->mime_type = mime_content_type($this->imageFile->tempName);
             $file->save();

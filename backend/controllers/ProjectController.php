@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
-use common\models\Project;
-use backend\models\PorjectSearch;
+use Yii;
 use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use common\models\Project;
 use yii\filters\VerbFilter;
+use backend\models\PorjectSearch;
+use yii\web\UploadedFile;
+//use GuzzleHttp\Psr7\UploadedFile;
+use yii\web\NotFoundHttpException;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -70,8 +73,13 @@ class ProjectController extends Controller
         $model = new Project();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())){// && $model->save()) {
+                $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                if($model->save()){
+                    $model->saveImage();
+                    Yii::$app->session->setFlash(key: 'success', value: 'Project created successfully.');
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -94,6 +102,7 @@ class ProjectController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash(key: 'success', value: 'Project updated successfully.');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

@@ -14,7 +14,7 @@ use Yii;
  * @property string|null $start_date
  * @property string|null $end_date
  *
- * @property ProjectImage[] $projectImages
+ * @property ProjectImage[] $images
  * @property Testimonial[] $testimonials
  */
 class Project extends \yii\db\ActiveRecord
@@ -67,7 +67,7 @@ class Project extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery|yii\db\ActiveQuery
      */
-    public function getProjectImages()
+    public function getImages()
     {
         return $this->hasMany(ProjectImage::class, ['project_id' => 'id']);
     }
@@ -114,5 +114,10 @@ class Project extends \yii\db\ActiveRecord
                 $db->transaction->rollBack();
             }
         });
+    }
+
+    public function hasImages() //verifica se o projeto tem imagens
+    {
+        return count($this->images) > 0;
     }
 }

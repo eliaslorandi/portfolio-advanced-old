@@ -91,25 +91,26 @@ class Project extends \yii\db\ActiveRecord
         return new ProjectQuery(get_called_class());
     }
 
-    public function saveImage()
-    {
+    public function saveImage() //4 etapas: criar um registo na tabela file, criar um registo na tabela project_image com id, 
+    {                           //salvar a imagem no disco, agrupar estas 3 etapas numa transação
         Yii::$app->db->transaction(function ($db) {
             /**
-             * @var $db \yii\db\Connection
-            */
+             * @var $db \yii\db\Connection //para ajudar a autocomplementar
+             */
             $file = new File();
-            $file->name = uniqid(true) . '.' . $this->imageFile->extension;
+            $file->name = uniqid(true) . '.' . $this->imageFile->extension; //para não haver ficheiros com o mesmo nome
             $file->base_url = Yii::$app->urlManager->createAbsoluteUrl(Yii::$app->params['uploads']['projects']);
             $file->mime_type = mime_content_type($this->imageFile->tempName);
             $file->save();
 
+            //criar registro de imagem do projeto na tabela project_image
             $projectImage = new ProjectImage();
             $projectImage->project_id = $this->id;
-            $projectImage->file_id = $file->id;
+            $projectImage->file_id = $file->id; //define o id
             $projectImage->save();
 
             //if para caso der erro no upload da imagem
-            if(!$this->imageFile->saveAs(Yii::$app->params['uploads']['projects'] . $file->name)){//substituido por um unico caminho em params.php('uploads/projects/' . $file->name)){
+            if (!$this->imageFile->saveAs(Yii::$app->params['uploads']['projects'] . '/' . $file->name)) { //substituido por um unico caminho em params.php('uploads/projects/' . $file->name)){
                 $db->transaction->rollBack();
             }
         });

@@ -11,7 +11,8 @@ use kartik\editors\Summernote;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); //['options' => ['enctype' => 'multipart/form-data']]?>
+    <?php $form = ActiveForm::begin(); //['options' => ['enctype' => 'multipart/form-data']]
+    ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
@@ -20,10 +21,7 @@ use kartik\editors\Summernote;
         // other widget settings
     ]); ?>
 
-    <?= $form->field($model, 'description')->widget(Summernote::class, [
-        'useKrajeePresets' => true,
-        // other widget settings
-    ]); ?>
+    <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::class, [
         //'language' => 'ru',
@@ -37,7 +35,10 @@ use kartik\editors\Summernote;
         'options' => ['readOnly' => true], //usuario não poderá escrever a data, apenas selecionar
     ]) ?>
 
-    <?= $form->field($model, 'imageFile')->fileInput() //versoes antes de 2.0.8 tem que add uo comentado?>
+    <?php foreach ($model->images as $image) ?>
+
+    <?= $form->field($model, 'imageFile')->fileInput() //versoes antes de 2.0.8 tem que add uo comentado
+    ?>
 
     <div class="form-group">
         <?= Html::submitButton(Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>

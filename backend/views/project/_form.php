@@ -24,13 +24,13 @@ use kartik\editors\Summernote;
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'start_date')->widget(\yii\jui\DatePicker::class, [
-        //'language' => 'ru',
+        //'language' => 'pt',
         //'dateFormat' => 'yyyy-MM-dd',  //pode ser removido pois em common foi setado o date padrão
         'options' => ['readOnly' => true], //usuario não poderá escrever a data, apenas selecionar
     ]) ?>
 
     <?= $form->field($model, 'end_date')->widget(\yii\jui\DatePicker::class, [
-        //'language' => 'ru',
+        //'language' => 'pt',
         //'dateFormat' => 'yyyy-MM-dd',
         'options' => ['readOnly' => true], //usuario não poderá escrever a data, apenas selecionar
     ]) ?>

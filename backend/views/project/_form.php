@@ -35,7 +35,12 @@ use kartik\editors\Summernote;
         'options' => ['readOnly' => true], //usuario não poderá escrever a data, apenas selecionar
     ]) ?>
 
-    <?php foreach ($model->images as $image) ?>
+    <?php foreach ($model->images as $image): ?>
+        <?= Html::img($image->file->AbsoluteUrl(), [
+            'alt' => 'Image demonstration',
+            'height' => 200,
+        ]) ?>
+    <?php endforeach; ?>
 
     <?= $form->field($model, 'imageFile')->fileInput() //versoes antes de 2.0.8 tem que add uo comentado
     ?>

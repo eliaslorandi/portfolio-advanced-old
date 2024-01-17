@@ -73,9 +73,9 @@ class ProjectController extends Controller
         $model = new Project();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post())){// && $model->save()) {
+            if ($model->load($this->request->post())) { // && $model->save()) {
                 $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                if($model->save()){
+                if ($model->save()) {
                     $model->saveImage();
                     Yii::$app->session->setFlash(key: 'success', value: 'Project created successfully.');
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -101,8 +101,12 @@ class ProjectController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            Yii::$app->session->setFlash(key: 'success', value: 'Project updated successfully.');
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->save()) {
+                $model->saveImage();
+            }
+            Yii::$app->session->setFlash(key: 'success', value: 'Project created successfully.');
             return $this->redirect(['view', 'id' => $model->id]);
         }
 

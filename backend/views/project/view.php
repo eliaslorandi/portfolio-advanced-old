@@ -44,8 +44,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     $imagesHtml = "";
                     foreach($model->images as $image){
                         $imagesHtml .= Html::img($image->file->AbsoluteUrl(), [
-                            'alt' => 'Demonstration of the user interface',
+                            'alt' => 'Image demonstration',
                             'height' => '200',
+                            'class' => 'project-view__image'
                         ]); //base_url . '/' . $image->file->name);
                     }
                     return $imagesHtml;

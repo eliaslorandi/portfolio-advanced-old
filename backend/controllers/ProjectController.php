@@ -6,7 +6,7 @@ use Yii;
 use yii\web\Controller;
 use common\models\Project;
 use yii\filters\VerbFilter;
-use backend\models\PorjectSearch;
+use backend\models\ProjectSearch;
 use yii\web\UploadedFile;
 //use GuzzleHttp\Psr7\UploadedFile;
 use yii\web\NotFoundHttpException;
@@ -41,7 +41,7 @@ class ProjectController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PorjectSearch();
+        $searchModel = new ProjectSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

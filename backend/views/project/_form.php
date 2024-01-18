@@ -37,7 +37,7 @@ use kartik\editors\Summernote;
 
     <?php foreach ($model->images as $image): ?>
         <?= Html::img($image->file->AbsoluteUrl(), [
-            'alt' => 'Image demonstration',
+            //'alt' => 'Image demonstration',
             'height' => 200,
         ]) ?>
     <?php endforeach; ?>

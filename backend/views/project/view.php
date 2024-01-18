@@ -38,6 +38,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     /**
                      * @var $model \common\models\Project
                      */
+
+                    //retorna imagetags no projeto            
                     if(!$model->hasImages()) {//se nao possui nenhuma imagem
                         return null;
                     }
